@@ -21,7 +21,7 @@
                 }
         }
 
-        static void PrintMeterToFeetList(int i, int j) {    
+        static void PrintMeterToFeetList(int i, int j) {
             for (int meter = i; meter <= j; meter++) {
                 double feet = FeetConverter.FromMeter(meter);
                 Console.WriteLine($"{meter}ft = {feet:0.0000}m");
