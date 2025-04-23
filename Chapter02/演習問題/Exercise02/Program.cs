@@ -15,7 +15,7 @@
             Console.Write("おわり：");
             int owari = int.Parse(Console.ReadLine());
 
-            //メートルからインチかインチからメートルかの判別
+            //メートルかインチの判別
             if (start == 1) {
                 for (int inch = hajime; inch <= owari; inch++) {
                     double meter = InchConverter.InchiToMeter(inch);
