@@ -24,7 +24,7 @@ namespace Exercise01 {
                 Console.Write("曲名：");//曲名を出力
                 string? title = Console.ReadLine();      //入力された曲名を取得
                 if (title.Equals("end", StringComparison.OrdinalIgnoreCase))
-                    return;        //endが入力されたら登録終了
+                    break;        //endが入力されたら登録終了
                 Console.Write("アーティスト名：");//アーティスト名を出力
                 string? artistname = Console.ReadLine();//入力されたアーティスト名を取得
                 Console.Write("演奏時間(秒)：");//演奏時間を出力
@@ -40,14 +40,14 @@ namespace Exercise01 {
                 Console.WriteLine();        //改行
             }
 
-            printSongs(sing);
+            printSongs(songs);
         }
 
 
 
         //2.1.4
-        private static void printSongs(Song[] songs) {
-            foreach (Song song in sing) {
+        private static void printSongs(IEnumerable<Song> songs) {
+           foreach (Song song in songs) {
                 var minutes = song.Length / 60;
                 var seconds = song.Length % 60;
                 Console.WriteLine($"{song.Title}, {song.ArtistName} {minutes}:{seconds:00}");
