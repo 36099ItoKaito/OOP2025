@@ -45,7 +45,9 @@ namespace Exercise02 {
         }
 
         private static void Exercise2_2(List<string> names) {
-            
+            // 小文字の'o'を含む都市名をカウント
+            int count = names.Count(s => s.Contains('o'));
+            Console.WriteLine($"小文字の'o'を含む都市名の数: {count}");
         }
 
         private static void Exercise2_3(List<string> names) {
