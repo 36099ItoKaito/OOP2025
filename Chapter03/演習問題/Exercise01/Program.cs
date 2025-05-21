@@ -39,21 +39,24 @@ namespace Exercise01 {
         }
 
         private static void Exercise3(List<int> numbers) {
-            // Whereメソッドで50以上の要素をフィルタリング
-            var result = numbers.Where(n => n >= 50);
-            // 結果をコンソールに出力
-            foreach (var number in result) {
-                Console.WriteLine(number);
-            }
+            /* // Whereメソッドで50以上の要素をフィルタリング
+             var result = numbers.Where(n => n >= 50);
+             // 結果をコンソールに出力
+             foreach (var number in result) {
+                 Console.WriteLine(number);
+             }*/
+            //foreach (var number in numbers.Where(n => n >= 50)) Console.WriteLine(number);
+            numbers.Where(n => n > 50).ToList().ForEach(n => Console.WriteLine(n));
         }
 
         private static void Exercise4(List<int> numbers) {
-            // Selectメソッドで各要素を2倍にし、List<int>に格納
+            /*// Selectメソッドで各要素を2倍にし、List<int>に格納
             List<int> doubledNumbers = numbers.Select(n => n * 2).ToList();
             // doubledNumbersの各要素をコンソールに出力
             foreach (var number in doubledNumbers) {
                 Console.WriteLine(number);
-            }
+            }*/
+            numbers.Select(n => n * 2).ToList().ForEach(n => Console.WriteLine(n));
         }
     }
 }
