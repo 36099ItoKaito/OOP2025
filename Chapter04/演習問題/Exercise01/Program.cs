@@ -49,11 +49,7 @@ namespace Exercise01 {
         }
 
         private static void Exercise3(List<string> langs) {
-            string? lang = langs.Find(s => s.Length == 10);
-            if (lang == null) {
-                lang = "unknown";
-            }
-
+            string? lang = langs.Find(s => s.Length == 10) ?? "unknown";
             Console.WriteLine(lang);
         }
     }
