@@ -20,6 +20,46 @@ namespace Exercise03 {
 
             Console.WriteLine("6.3.5");
             Exercise5(text);
+
+            Console.WriteLine("6.3.99");
+            Exercise6(text);
+        }
+
+        private static void Exercise6(string text) {
+            var str = text.ToLower();
+
+            for (char ch = 'a'; ch <= 'z'; ch++) {
+                Console.WriteLine(ch + ":" + str.Count(s => s == ch));
+            }
+
+            //辞書で集計
+            //var alphDicCount = Enumerable.Range('a', 26)
+            //    .ToDictionary(num => ((char)num).ToString(), num => 0);
+            //foreach(var alph in str) {
+            //    alphDicCount[alph.ToString()]++;
+            //foreach(var item in alphDicCount) {
+            //    Console.WriteLine($"{item.Key}:{item.Value}");
+            //    }
+            //}
+
+            Console.WriteLine();
+
+            //配列で集計
+            //var array = Enumerable.Repeat(0,26).ToArray();
+
+            //foreach(var alph in str) {
+            //    array[alph - 'a']++;
+            //}
+
+            //for(char ch = 'a';ch <= 'z'; ch++) {
+            //    Console.WriteLine($"{ch}:{array[ch - 'a']}");
+            //}
+
+            Console.WriteLine();
+
+
+
+
         }
 
         private static void Exercise1(string text) {
@@ -36,7 +76,7 @@ namespace Exercise03 {
         private static void Exercise3(string text) {
             var array = text.Split(' ');
             var sb = new StringBuilder(array[0]);
-            foreach(var word in array.Skip(1)) {
+            foreach (var word in array.Skip(1)) {
                 sb.Append(" ");
                 sb.Append(word);
             }
