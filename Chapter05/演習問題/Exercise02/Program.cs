@@ -35,7 +35,7 @@ namespace Exercise02 {
         //5.2.3
         //ここにメソッドを作成【メソッド名：FindFirst21C】
         private static YearMonth? FindFirst21C(YearMonth[] ymCollection) {
-            foreach (YearMonth ym in ymCollection) {
+            foreach (var ym in ymCollection) {
                 if (ym.Is21Century) {
                     return ym;
                 }
@@ -45,12 +45,20 @@ namespace Exercise02 {
 
         //5.2.4
         private static void Exercise4(YearMonth[] ymCollection) {
-            
+            var change = FindFirst21C(ymCollection);
+            if (change == null) {
+                Console.WriteLine("２１世紀のデータはありません");
+            } else {
+                Console.WriteLine(change.Year);
+            }
         }
 
         //5.2.5
         private static void Exercise5(YearMonth[] ymCollection) {
-            
+            var array = ymCollection.Select(i => i.AddOneMonth()).ToArray();
+            foreach (var item in array) {
+                Console.WriteLine(item);
+            }
         }
     }
 }
