@@ -36,7 +36,7 @@ namespace Exercise02 {
         //ここにメソッドを作成【メソッド名：FindFirst21C】
         private static YearMonth? FindFirst21C(YearMonth[] ymCollection) {
             foreach (YearMonth ym in ymCollection) {
-                if (ym.Year >= 2001 && ym.Year <= 2100) {
+                if (ym.Is21Century) {
                     return ym;
                 }
             } 
