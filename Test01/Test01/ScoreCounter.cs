@@ -15,7 +15,7 @@ namespace Test01 {
             var scores = new List<Student>();
             var lines = File.ReadAllLines(filePath);
             foreach (var line in lines) {
-                string[] items = line.Split(',');
+                string[] items = line.Split(' ');
                 Student score = new Student() {
                     Name = items[0],
                     Subject = items[1],
