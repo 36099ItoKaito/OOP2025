@@ -61,6 +61,9 @@ namespace Section01 {
             }
             Console.WriteLine($"あなたは{age}歳です");
             //⑤1月１日から何日目か？
+            var nisuu = DateTime.Today;
+            int dayOfYear = today.DayOfYear;
+            Console.WriteLine(dayOfYear);
 
         }
     }
