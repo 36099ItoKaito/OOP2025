@@ -4,47 +4,49 @@ namespace Test01 {
     public class ScoreCounter {
         private IEnumerable<Student> _score;
 
-        // コンストラクタ
+        /// <param name="filePath">読み込み対象のファイルのパス</param>
         public ScoreCounter(string filePath) {
             _score = ReadScore(filePath);
-
         }
 
-        //メソッドの概要： 
+        //メソッドの概要：
+        //指定したファイルパスから、名前、教科、点数の一覧を取得する。
         private static IEnumerable<Student> ReadScore(string filePath) {
             var scores = new List<Student>();
             var lines = File.ReadAllLines(filePath);
+
+            //分割、登録処理
             foreach (var line in lines) {
-                string[] items = line.Split(' ');
-                Student score = new Student() {
+                var items = line.Split(',');
+
+                //第三引数はintなのでint変換
+                int score = int.Parse(items[2]);
+
+                var student = new Student {
                     Name = items[0],
                     Subject = items[1],
-                    Score = int.Parse(items[2])
+                    Score = score
                 };
-                scores.Add(score);
+                scores.Add(student);
             }
             return scores;
-
-
-
-
         }
 
-        //メソッドの概要： Subjectとscoreを計算
+        //メソッドの概要：
+        //教科ごとの合計点数を求め、教科名をキーとした点数の一覧を返す。
         public IDictionary<string, int> GetPerStudentScore() {
-            var dict = new SortedDictionary<string, int>();
-            foreach (var score in _score) {
-                if (dict.ContainsKey(score.Subject)) {
-                    dict[score.Subject] += score.Score;
+            var dict = new Dictionary<string, int>();
+
+            //集計処理
+            foreach (var scorePair in _score) {
+                //登録済み、未登録での処理分岐
+                if (dict.ContainsKey(scorePair.Name)) {
+                    dict[scorePair.Name] += scorePair.Score;
                 } else {
-                    dict[score.Subject] = score.Score;
+                    dict[scorePair.Name] = scorePair.Score;
                 }
             }
             return dict;
-
-
-
-
         }
     }
 }
