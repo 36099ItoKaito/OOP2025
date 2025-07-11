@@ -1,4 +1,4 @@
-﻿namespace CarRepoetSystem {
+﻿namespace CarReportSystem {
     partial class fmVersion {
         /// <summary>
         /// Required designer variable.
@@ -30,9 +30,9 @@
             // 
             // btOK
             // 
-            btOK.Location = new Point(279, 181);
+            btOK.Location = new Point(267, 173);
             btOK.Name = "btOK";
-            btOK.Size = new Size(75, 23);
+            btOK.Size = new Size(94, 31);
             btOK.TabIndex = 0;
             btOK.Text = "OK";
             btOK.UseVisualStyleBackColor = true;
@@ -41,20 +41,20 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Yu Gothic UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 128);
-            label1.Location = new Point(27, 23);
+            label1.Font = new Font("UD デジタル 教科書体 NK", 18F, FontStyle.Regular, GraphicsUnit.Point, 128);
+            label1.Location = new Point(26, 35);
             label1.Name = "label1";
-            label1.Size = new Size(238, 32);
+            label1.Size = new Size(272, 28);
             label1.TabIndex = 1;
-            label1.Text = "カーレポート管理システム";
+            label1.Text = "試乗レポート管理システム";
             // 
             // lbVersion
             // 
             lbVersion.AutoSize = true;
-            lbVersion.Font = new Font("Yu Gothic UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 128);
-            lbVersion.Location = new Point(241, 92);
+            lbVersion.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
+            lbVersion.Location = new Point(267, 86);
             lbVersion.Name = "lbVersion";
-            lbVersion.Size = new Size(68, 21);
+            lbVersion.Size = new Size(81, 25);
             lbVersion.TabIndex = 2;
             lbVersion.Text = "Ver.0.0.1";
             // 
@@ -62,11 +62,12 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(366, 216);
+            ClientSize = new Size(387, 231);
             Controls.Add(lbVersion);
             Controls.Add(label1);
             Controls.Add(btOK);
             FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
             MinimizeBox = false;
             Name = "fmVersion";
             Text = "fmVersion";

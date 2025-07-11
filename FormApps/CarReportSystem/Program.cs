@@ -1,4 +1,4 @@
-namespace CarRepoetSystem {
+namespace CarReportSystem {
     internal static class Program {
         /// <summary>
         ///  The main entry point for the application.
