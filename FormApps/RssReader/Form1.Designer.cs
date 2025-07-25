@@ -29,8 +29,8 @@
             wvRssLink = new Microsoft.Web.WebView2.WinForms.WebView2();
             btGoBack = new Button();
             btGoForward = new Button();
-            button1 = new Button();
-            textBox1 = new TextBox();
+            btEntry = new Button();
+            tbName = new TextBox();
             ((System.ComponentModel.ISupportInitialize)wvRssLink).BeginInit();
             SuspendLayout();
             // 
@@ -41,6 +41,7 @@
             tbUrl.Name = "tbUrl";
             tbUrl.Size = new Size(503, 33);
             tbUrl.TabIndex = 0;
+            tbUrl.SelectedIndexChanged += tbUrl_SelectedIndexChanged;
             // 
             // btRssGet
             // 
@@ -100,30 +101,32 @@
             btGoForward.UseVisualStyleBackColor = true;
             btGoForward.Click += btGoForward_Click;
             // 
-            // button1
+            // btEntry
             // 
-            button1.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
-            button1.Location = new Point(681, 52);
-            button1.Name = "button1";
-            button1.Size = new Size(78, 32);
-            button1.TabIndex = 5;
-            button1.Text = "登録";
-            button1.UseVisualStyleBackColor = true;
+            btEntry.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
+            btEntry.Location = new Point(681, 52);
+            btEntry.Name = "btEntry";
+            btEntry.Size = new Size(78, 32);
+            btEntry.TabIndex = 5;
+            btEntry.Text = "登録";
+            btEntry.UseVisualStyleBackColor = true;
+            btEntry.Click += btEntry_Click;
             // 
-            // textBox1
+            // tbName
             // 
-            textBox1.Location = new Point(172, 58);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(503, 23);
-            textBox1.TabIndex = 6;
+            tbName.Location = new Point(172, 58);
+            tbName.Name = "tbName";
+            tbName.Size = new Size(503, 23);
+            tbName.TabIndex = 6;
+            tbName.TextChanged += tbName_TextChanged;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(779, 635);
-            Controls.Add(textBox1);
-            Controls.Add(button1);
+            Controls.Add(tbName);
+            Controls.Add(btEntry);
             Controls.Add(btGoForward);
             Controls.Add(btGoBack);
             Controls.Add(wvRssLink);
@@ -132,6 +135,7 @@
             Controls.Add(tbUrl);
             Name = "Form1";
             Text = "RSSリーダー";
+            Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)wvRssLink).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -145,7 +149,7 @@
         private Microsoft.Web.WebView2.WinForms.WebView2 wvRssLink;
         private Button btGoBack;
         private Button btGoForward;
-        private Button button1;
-        private TextBox textBox1;
+        private Button btEntry;
+        private TextBox tbName;
     }
 }
