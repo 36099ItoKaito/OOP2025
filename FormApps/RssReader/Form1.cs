@@ -112,7 +112,23 @@ namespace RssReader {
         }
 
         private void btEntry_Click(object sender, EventArgs e) {
+            string name = tbName.Text.Trim();
+            string url = tbUrl.Text.Trim();
 
+            if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(url)) {
+                MessageBox.Show("–¼‘O‚Ü‚½‚ÍURL‚ª‹ó‚Å‚·B—¼•û‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B");
+                return;
+            }
+            
+            if (rssUrlDict.ContainsKey(name)) {
+                MessageBox.Show("‚±‚Ì–¼‘O‚Í‚·‚Å‚É“o˜^‚³‚ê‚Ä‚¢‚Ü‚·B");
+            } else {
+                rssUrlDict[name] = url;
+                tbUrl.DataSource = null;
+                tbUrl.DataSource = rssUrlDict.Keys.ToList();
+                tbName.Clear();
+                MessageBox.Show("“o˜^‚Å‚«‚Ü‚µ‚½");
+            }
         }
     }
 }
