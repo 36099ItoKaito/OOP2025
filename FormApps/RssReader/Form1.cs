@@ -119,7 +119,7 @@ namespace RssReader {
                 MessageBox.Show("名前またはURLが空です。両方を入力してください。");
                 return;
             }
-            
+
             if (rssUrlDict.ContainsKey(name)) {
                 MessageBox.Show("この名前はすでに登録されています。");
             } else {
@@ -128,6 +128,24 @@ namespace RssReader {
                 tbUrl.DataSource = rssUrlDict.Keys.ToList();
                 tbName.Clear();
                 MessageBox.Show("登録できました");
+            }
+        }
+
+        private void btDelete_Click(object sender, EventArgs e) {
+            string selectedName = tbUrl.SelectedItem?.ToString();
+
+            if (string.IsNullOrEmpty(selectedName)) {
+                MessageBox.Show("削除するRSSを選択してください。");
+                return;
+            }
+
+            if (rssUrlDict.ContainsKey(selectedName)) {
+                rssUrlDict.Remove(selectedName);
+                tbUrl.DataSource = null;
+                tbUrl.DataSource = rssUrlDict.Keys.ToList();
+                MessageBox.Show($"{selectedName} のRSSを削除しました。");
+            } else {
+                MessageBox.Show("選択されたRSSが見つかりません。");
             }
         }
     }

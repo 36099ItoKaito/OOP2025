@@ -31,6 +31,7 @@
             btGoForward = new Button();
             btEntry = new Button();
             tbName = new TextBox();
+            btDelete = new Button();
             ((System.ComponentModel.ISupportInitialize)wvRssLink).BeginInit();
             SuspendLayout();
             // 
@@ -114,11 +115,22 @@
             // 
             // tbName
             // 
-            tbName.Location = new Point(172, 58);
+            tbName.Location = new Point(88, 52);
             tbName.Name = "tbName";
             tbName.Size = new Size(503, 23);
             tbName.TabIndex = 6;
             tbName.TextChanged += tbName_TextChanged;
+            // 
+            // btDelete
+            // 
+            btDelete.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
+            btDelete.Location = new Point(597, 52);
+            btDelete.Name = "btDelete";
+            btDelete.Size = new Size(78, 32);
+            btDelete.TabIndex = 5;
+            btDelete.Text = "削除";
+            btDelete.UseVisualStyleBackColor = true;
+            btDelete.Click += btDelete_Click;
             // 
             // Form1
             // 
@@ -126,6 +138,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(779, 635);
             Controls.Add(tbName);
+            Controls.Add(btDelete);
             Controls.Add(btEntry);
             Controls.Add(btGoForward);
             Controls.Add(btGoBack);
@@ -151,5 +164,6 @@
         private Button btGoForward;
         private Button btEntry;
         private TextBox tbName;
+        private Button btDelete;
     }
 }
