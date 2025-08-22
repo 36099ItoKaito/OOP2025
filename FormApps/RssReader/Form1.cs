@@ -27,6 +27,14 @@ namespace RssReader {
             tbUrl.DataSource = rssUrlDict.Select(k => k.Key).ToList();
             tbUrl.SelectedIndex = -1;
             GoForwardBtEnableSet();
+
+            lbTitles.DrawMode = DrawMode.OwnerDrawFixed;
+
+            //for (int i = 0; i < 20; i++) {
+            //    lbTitles.Items.Add(items + (i + 1));
+            //}
+
+            //lbTitles.DrawItem += lbTitles_DrawItem;
         }
 
         private async void btRssGet_Click(object sender, EventArgs e) {
@@ -74,8 +82,11 @@ namespace RssReader {
             //        webView21.Source = new Uri(link);
             //    }
             //}
-
+            if (items is null || lbTitles.SelectedItems is null) {
+                return;
+            }
             wvRssLink.Source = new Uri(items[lbTitles.SelectedIndex].Link);
+
 
 
         }
@@ -147,6 +158,33 @@ namespace RssReader {
             } else {
                 MessageBox.Show("‘I‘ð‚³‚ê‚½RSS‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB");
             }
+        }
+
+        private void btHome_Click(object sender, EventArgs e) {
+            wvRssLink.Source = new Uri("https://www.yahoo.co.jp/");
+        }
+
+        private void lbTitles_DrawItem(object sender, DrawItemEventArgs e) {
+            if (e.Index < 0) return;
+
+            Color backColor = (e.Index % 2 == 0) ? Color.White : Color.LightGray;
+
+            if((e.State & DrawItemState.Selected) == DrawItemState.Selected) {
+                backColor = SystemColors.Highlight;
+            }
+
+            using(SolidBrush backgroundBrush = new SolidBrush(backColor)) {
+                e.Graphics.FillRectangle(backgroundBrush, e.Bounds);
+            }
+
+            string text = lbTitles.Items[e.Index].ToString();
+            Color textColor = ((e.State & DrawItemState.Selected) == DrawItemState.Selected) ? SystemColors.HighlightText : Color.Black;
+
+            using(SolidBrush textBrush = new SolidBrush(textColor)) {
+                e.Graphics.DrawString(text, e.Font, textBrush, e.Bounds);
+            }
+
+            e.DrawFocusRectangle();
         }
     }
 }

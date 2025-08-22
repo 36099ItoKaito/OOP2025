@@ -32,6 +32,7 @@
             btEntry = new Button();
             tbName = new TextBox();
             btDelete = new Button();
+            btHome = new Button();
             ((System.ComponentModel.ISupportInitialize)wvRssLink).BeginInit();
             SuspendLayout();
             // 
@@ -57,14 +58,15 @@
             // 
             // lbTitles
             // 
-            lbTitles.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            lbTitles.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             lbTitles.FormattingEnabled = true;
             lbTitles.ItemHeight = 15;
             lbTitles.Location = new Point(12, 106);
             lbTitles.Name = "lbTitles";
-            lbTitles.Size = new Size(747, 169);
+            lbTitles.Size = new Size(287, 619);
             lbTitles.TabIndex = 2;
             lbTitles.Click += lbTitles_Click;
+            lbTitles.DrawItem += lbTitles_DrawItem;
             // 
             // wvRssLink
             // 
@@ -72,9 +74,9 @@
             wvRssLink.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             wvRssLink.CreationProperties = null;
             wvRssLink.DefaultBackgroundColor = Color.White;
-            wvRssLink.Location = new Point(12, 281);
+            wvRssLink.Location = new Point(305, 106);
             wvRssLink.Name = "wvRssLink";
-            wvRssLink.Size = new Size(747, 342);
+            wvRssLink.Size = new Size(629, 619);
             wvRssLink.TabIndex = 3;
             wvRssLink.ZoomFactor = 1D;
             wvRssLink.NavigationCompleted += wvRssLink_NavigationCompleted;
@@ -115,9 +117,10 @@
             // 
             // tbName
             // 
-            tbName.Location = new Point(88, 52);
+            tbName.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
+            tbName.Location = new Point(90, 51);
             tbName.Name = "tbName";
-            tbName.Size = new Size(503, 23);
+            tbName.Size = new Size(501, 33);
             tbName.TabIndex = 6;
             tbName.TextChanged += tbName_TextChanged;
             // 
@@ -132,11 +135,23 @@
             btDelete.UseVisualStyleBackColor = true;
             btDelete.Click += btDelete_Click;
             // 
+            // btHome
+            // 
+            btHome.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
+            btHome.Location = new Point(12, 52);
+            btHome.Name = "btHome";
+            btHome.Size = new Size(72, 32);
+            btHome.TabIndex = 7;
+            btHome.Text = "⌂";
+            btHome.UseVisualStyleBackColor = true;
+            btHome.Click += btHome_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(779, 635);
+            ClientSize = new Size(946, 737);
+            Controls.Add(btHome);
             Controls.Add(tbName);
             Controls.Add(btDelete);
             Controls.Add(btEntry);
@@ -165,5 +180,6 @@
         private Button btEntry;
         private TextBox tbName;
         private Button btDelete;
+        private Button btHome;
     }
 }
