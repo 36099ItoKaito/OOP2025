@@ -1,0 +1,103 @@
+﻿<Window x:Class="CustomerApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CustomerApp"
+        mc:Ignorable="d"
+        Title="顧客管理アプリケーション" Height="500" Width="900">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- 顧客リスト -->
+        <GroupBox Header="顧客リスト" Grid.Column="0" Margin="0,0,10,0">
+            <ListBox x:Name="CustomerList"
+                     DisplayMemberPath="Name"
+                     SelectionChanged="CustomerList_SelectionChanged"/>
+        </GroupBox>
+
+        <!-- 詳細・編集エリア -->
+        <GroupBox Header="顧客情報" Grid.Column="1">
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- 名前 -->
+                <StackPanel Grid.Row="0" Margin="0,0,0,10">
+                    <Label Content="名前:"/>
+                    <TextBox x:Name="NameTextBox"/>
+                </StackPanel>
+
+                <!-- 電話番号 -->
+                <StackPanel Grid.Row="1" Margin="0,0,0,10">
+                    <Label Content="電話番号:"/>
+                    <TextBox x:Name="PhoneTextBox"/>
+                </StackPanel>
+
+                <!-- 住所 -->
+                <StackPanel Grid.Row="2" Margin="0,0,0,10">
+                    <Label Content="住所:"/>
+                    <TextBox x:Name="AddressTextBox"
+                             Height="60" 
+                             TextWrapping="Wrap" 
+                             AcceptsReturn="True"
+                             VerticalScrollBarVisibility="Auto"/>
+                </StackPanel>
+
+                <!-- 画像 -->
+                <StackPanel Grid.Row="3" Margin="0,0,0,10">
+                    <Label Content="画像:"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                        <Button Content="画像を選択" 
+                                Click="SelectImageButton_Click" 
+                                Width="100" 
+                                Margin="0,0,10,0"/>
+                        <Button Content="画像をクリア" 
+                                Click="ClearImageButton_Click" 
+                                Width="100"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- 画像プレビュー -->
+                <Border Grid.Row="4" 
+                        BorderBrush="Gray" 
+                        BorderThickness="1" 
+                        Margin="0,0,0,10"
+                        Background="WhiteSmoke">
+                    <Image x:Name="CustomerImage"
+                           Stretch="Uniform"
+                           MaxHeight="200"/>
+                </Border>
+
+                <!-- ボタン -->
+                <StackPanel Grid.Row="5" 
+                            Orientation="Horizontal" 
+                            HorizontalAlignment="Right">
+                    <Button Content="新規" 
+                            Click="NewButton_Click" 
+                            Width="80" 
+                            Margin="0,0,10,0"
+                            Padding="5"/>
+                    <Button Content="更新" 
+                            Click="SaveButton_Click" 
+                            Width="80" 
+                            Margin="0,0,10,0"
+                            Padding="5"/>
+                    <Button Content="削除" 
+                            Click="DeleteButton_Click" 
+                            Width="80"
+                            Padding="5"/>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Window>
