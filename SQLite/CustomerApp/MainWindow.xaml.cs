@@ -1,7 +1,11 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
+using System.Net.Http;
+using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using SQLite;
@@ -82,6 +86,7 @@ public class Customer : INotifyPropertyChanged {
 
 public partial class MainWindow : Window {
     private readonly SQLiteConnection _database;
+    private readonly HttpClient _httpClient;
     public ObservableCollection<Customer> Customers { get; set; }
     private byte[]? _imageData;
 
@@ -94,11 +99,76 @@ public partial class MainWindow : Window {
 
         _database = new SQLiteConnection(dbPath);
         _database.CreateTable<Customer>();
+        _httpClient = new HttpClient();
 
         Customers = new ObservableCollection<Customer>();
         LoadCustomers();
 
         CustomerList.ItemsSource = Customers;
+
+        AddressTextBox.PreviewKeyDown += AddressTextBox_PreviewKeyDown;
+    }
+
+    private async void AddressTextBox_PreviewKeyDown(object sender, KeyEventArgs e) {
+        if (e.Key == Key.Enter) {
+            var text = AddressTextBox.Text.Trim();
+
+            var postalCode = ExtractPostalCode(text);
+
+            if (!string.IsNullOrEmpty(postalCode)) {
+                await SearchAddressByPostalCode(postalCode);
+                e.Handled = true;
+            }
+        }
+    }
+
+    private string ExtractPostalCode(string input) {
+        if (!Regex.IsMatch(input, @"^〒?\d{3}-?\d{4}$"))
+            return "";
+
+        var digits = Regex.Replace(input, @"[^\d]", "");
+
+        if (digits.Length == 7) {
+            return digits;
+        }
+
+        return string.Empty;
+    }
+
+    private async Task SearchAddressByPostalCode(string postalCode) {
+        try {
+            var url = $"https://zipcloud.ibsnet.co.jp/api/search?zipcode={postalCode}";
+            var response = await _httpClient.GetStringAsync(url);
+
+            using var doc = JsonDocument.Parse(response);
+            var root = doc.RootElement;
+
+            if (root.TryGetProperty("results", out var results) && results.ValueKind == JsonValueKind.Array) {
+                var firstResult = results.EnumerateArray().FirstOrDefault();
+
+                if (firstResult.ValueKind != JsonValueKind.Undefined) {
+                    var address1 = firstResult.GetProperty("address1").GetString() ?? "";
+                    var address2 = firstResult.GetProperty("address2").GetString() ?? "";
+                    var address3 = firstResult.GetProperty("address3").GetString() ?? "";
+
+                    var fullAddress = $"{address1}{address2}{address3}";
+                    AddressTextBox.Text = fullAddress;
+
+                    AddressTextBox.CaretIndex = AddressTextBox.Text.Length;
+                }
+            } else {
+                MessageBox.Show("郵便番号が見つかりませんでした。", "検索結果",
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+        catch (HttpRequestException) {
+            MessageBox.Show("郵便番号の検索に失敗しました。\nインターネット接続を確認してください。",
+                "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+        catch (Exception ex) {
+            MessageBox.Show($"エラーが発生しました: {ex.Message}",
+                "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
     }
 
     private void LoadCustomers() {
@@ -273,6 +343,7 @@ public partial class MainWindow : Window {
     }
 
     protected override void OnClosed(EventArgs e) {
+        _httpClient?.Dispose();
         _database?.Close();
         base.OnClosed(e);
     }
