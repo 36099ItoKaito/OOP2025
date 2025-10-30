@@ -103,7 +103,7 @@ namespace Exercise01 {
         }
 
         private static void Exercise1_8() {
-            var categoriesWithMoreThanFourBooks = Library.Categories
+            var categories = Library.Categories
                 .GroupJoin(Library.Books,
                            category => category.Id,
                            book => book.CategoryId,
@@ -115,7 +115,7 @@ namespace Exercise01 {
                 .OrderBy(group => group.Category.Name)
                 .ToList();
 
-            foreach (var categoryGroup in categoriesWithMoreThanFourBooks) {
+            foreach (var categoryGroup in categories) {
                 Console.WriteLine(categoryGroup.Category.Name);
             }
         }
