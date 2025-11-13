@@ -7,16 +7,31 @@ using System.Threading.Tasks;
 
 namespace TextFileProcessor {
     public abstract class TextProcessor {
+        protected string SearchWord { get; private set; } = "";
+
         public static void Run<T>(string fileName) where T : TextProcessor, new() {
             var self = new T();
             self.Process(fileName);
         }
 
-        private void Process(string fileName) {
-            Initialize(fileName);
-            var lines = File.ReadLines(fileName);
+        private void Process(string path) {
+            Initialize(path);
+
+            Console.WriteLine("検索する文字：");
+            var moji = Console.ReadLine();
+            SearchWord = moji ?? "";
+
+
+            if (!File.Exists(path)) {
+                Console.WriteLine($"エラー: ファイル '{path}' が見つかりません。");
+                return;
+            }
+
+            var lines = File.ReadLines(path);
             foreach (var line in lines) {
-                Execute(line);
+                if (!string.IsNullOrEmpty(moji) && line.Contains(moji)) {
+                    Execute(line);
+                }
             }
             Terminate();
 

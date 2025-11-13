@@ -11,8 +11,16 @@ namespace LineCounter {
 
         protected override void Initialize(string fname) => _count = 0;
 
-        protected override void Execute(string line) => _count++;
+        protected override void Execute(string line) {
+            if (!string.IsNullOrEmpty(SearchWord)) {
+                int index = 0;
+                while ((index = line.IndexOf(SearchWord, index)) != -1) {
+                    _count++;
+                    index += SearchWord.Length;
+                }
+            }
+        }
 
-        protected override void Terminate() => Console.WriteLine("{0} 行", _count);
+        protected override void Terminate() => Console.WriteLine("「{0}」が見つかった回数: {1} 回", SearchWord, _count);
     }
 }
